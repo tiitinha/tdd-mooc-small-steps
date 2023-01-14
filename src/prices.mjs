@@ -70,14 +70,14 @@ function createApp(database) {
 
   function calculateReduction(date) {
     let reduction = 0;
-    if (date && isMonday(date) && !isHoliday(date)) {
+    if (date && isMonday(Temporal.PlainDate.from({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() })) && !isHoliday(date)) {
       reduction = 35;
     }
     return reduction;
   }
 
   function isMonday(date) {
-    return Temporal.PlainDate.from({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() }).dayOfWeek === 1;
+    return date.dayOfWeek === 1;
   }
 
   function isHoliday(date) {
