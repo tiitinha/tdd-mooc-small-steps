@@ -83,12 +83,12 @@ function createApp(database) {
   function isHoliday(date) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
-      let holiday = new Date(row.holiday);
+      let holiday = Temporal.PlainDate.from(row.holiday);
       if (
         date &&
-        date.year === holiday.getFullYear() &&
-        date.month === holiday.getMonth() &&
-        date.day === holiday.getDate()
+        date.year === holiday.year &&
+        date.month === holiday.month &&
+        date.day === holiday.day
       ) {
         return true;
       }
