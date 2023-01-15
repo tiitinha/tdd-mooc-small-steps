@@ -70,7 +70,7 @@ function createApp(database) {
 
   function calculateReduction(date) {
     let reduction = 0;
-    if (date && isMonday(Temporal.PlainDate.from({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() })) && !isHoliday(date)) {
+    if (date && isMonday(Temporal.PlainDate.from({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() })) && !isHoliday(Temporal.PlainDate.from({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() }))) {
       reduction = 35;
     }
     return reduction;
@@ -86,9 +86,9 @@ function createApp(database) {
       let holiday = new Date(row.holiday);
       if (
         date &&
-        date.getFullYear() === holiday.getFullYear() &&
-        date.getMonth() === holiday.getMonth() &&
-        date.getDate() === holiday.getDate()
+        date.year === holiday.getFullYear() &&
+        date.month === holiday.getMonth() &&
+        date.day === holiday.getDate()
       ) {
         return true;
       }
